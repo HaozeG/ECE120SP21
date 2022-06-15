@@ -1,0 +1,19 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	LOOP1             3003
+//	LOOP1_END         3008
+//	LOOP2             300A
+//	INNERLOOP         300F
+//	WRITE_ONE         3014
+//	NEXT              3016
+//	PRINTLOOP         3023
+//	SET_ZERO          302B
+//	SET_ONE           302C
+//	CHAR              302D
+//	MASK              302E
+//	LINEFEED          302F
+//	OUTPUT            3030
+//	FONT_DATA         30C0
+

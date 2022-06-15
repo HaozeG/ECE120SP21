@@ -1,0 +1,45 @@
+
+Signed integer computation
+
+1. What is the largest value representable in 16-bit signed format? Smallest?
+The largest value is 32767. The smallest one is -32768.
+2. What is the result of the third computation? Why?
+The result is -22536. We get this result because when this program uses the 2's complement representation of two operands when doing addition. And overflow occurs when we add 21000 and 22000 together.
+3. Why does the fourth computation overflow, but not the fifth?
+Because the range of numbers that 16-bit 2's complement can represent is [-32768,32767], 32767+1 has an overflow while -32767-1 doesn't have.
+4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in signed mode)?
+
+Unsigned integer computation
+
+1. What is the largest value representable in 16-bit unsigned format? Smallest?
+The largest value is 65535. The smallest one is 0.
+2. What result do you get from the first computation? Why?
+I get 65437. Because in the unsigned 16-bit mode, computer converts the input decimal number to unsigned 16-bit number and does addition. When it calculates 100-199, an overflow occurs thus gives 65437.
+3. Why doesn't the second or third computation overflow?
+4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in unsigned mode)?
+5. What are the advantages and disadvantages of unsigned formats (compared to signed formats)?
+
+Multiplication, division, modulus
+
+1. What result do you get in the second and third computations? Why?
+I get -15536 in the second computation and 15536 in the third computation.
+Because an overflow occurs when doing these two computations in signed 16-bit mode.
+2. What results do you get from computations 4-7? Why? (Hint: can signed 16-bit encoding represent fractions?)
+From 4-7, I get 4,3,3,3. Because signed 16-bit mode cannot represent fractions, it chops off the 17th bit of the output.
+3. Does the result from computations 4-7 get rounded to the nearest integer? If not, what actually happens? Where might this behavior be useful? (Hint: what if you wanted to divide 11 candies between 3 people?)
+4. What does the modulus operator do for positive integers?
+5. What happens when you divide by 0? Modulus with 0? What happens to the binary-calculator program? Why might this be a good thing? (Hint: remember the discussion introduction?)
+6. Excluding division by 0, characterize the behavior of the modulus operation for positive and negative divisors and dividends (for a total of 2x2 = 4 combinations).
+
+Floating point
+
+1. Why is there an error in the fourth computation, but not the third? (Hint: how do you encode 0.25 and 0.3 in floating point?)
+0.25 can be represented by limited bits but 0.3 cannot. So some part of 0.3 would be chopped off. Thus the result is not correct.
+2. How does the result of the fifth computation compare to the fourth? Explain. (Hint: look at the hex representations of the results. How does the floating point format handle negative numbers?)
+They have the same magnitude but with different signs. By looking at the hex representations, I find that only the first letter of their hex representations is different. So the first bit is used to present the sign.
+3. Mathematically, would you expect the same results in computations 6 and 7? Do you observe this result experimentally? Explain. (Hint: try stepping through each computation)
+I expect they are the same. But the result turns out to be different after experimenting. This program use IEEE-754 Floting-point Conversion, which has 23 bits to store the significand numbers. When it compute 9000+0.0001, 9000 needs many bits to store, which forced 0.0001 to be chopped off. So the result of 9000+0.0001 is still 9000. However, 9000-9005 gets -0.5 and it has enough bits to store 0.0001.
+4. What happens if you try computation 6 in double-precision (64-bit) floating-point mode? Why?
+5. Why is there noticeable error in computation 8, but not 9? (Hint: think of multiplying floating point numbers like multiplying two numbers in scientific notation, how do you do it?)
+6. The root cause of the Ariane 5 rocket failure was isolated to the conversion of a floating point number, which stored the horizontal component of the rocket's velocity, to a 16-bit signed integer. What is the most likely cause of the failure? (Hint: this wasn't some small rounding error, the computed velocity was way off, causing the system to go haywire)
+
